@@ -4,6 +4,7 @@ using System.Collections;
 public class Nave : MonoBehaviour {
 	private Rigidbody2D rb;
 	public float fuerza;
+	public float rotacion;
 	public GameObject muerte;
 
 	void Start(){
@@ -15,10 +16,10 @@ public class Nave : MonoBehaviour {
 			rb.AddForce (Vector2.up * fuerza);
 		}
 		if (Input.GetKey (KeyCode.RightArrow)) {
-			rb.AddForce (Vector2.right * fuerza);
+			rb.AddTorque (-rotacion);
 		}
 		if (Input.GetKey (KeyCode.LeftArrow)) {
-			rb.AddForce (Vector2.right * -fuerza);
+			rb.AddTorque(rotacion);
 		}
 	}
 	void OnCollisionEnter2D (Collision2D col){

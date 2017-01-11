@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Nave : MonoBehaviour {
 	private Rigidbody2D rb;
-	public float fuerza;
+	public float fuerza = 15f;
 	public float rotacion;
 	public GameObject muerte;
 
@@ -13,20 +13,15 @@ public class Nave : MonoBehaviour {
 
 	void Update(){
 		if (Input.GetKey (KeyCode.UpArrow)) {
-			rb.AddForce (Vector2.up * fuerza);
+			rb.AddForce (transform.up * fuerza);
 		}
 		if (Input.GetKey (KeyCode.RightArrow)) {
-			rb.AddTorque (-rotacion);
+			rb.AddTorque (-rotacion/2);
+			rb.AddForce (Vector2.up * fuerza/3);
 		}
 		if (Input.GetKey (KeyCode.LeftArrow)) {
-			rb.AddTorque(rotacion);
+			rb.AddTorque(rotacion/2);
+			rb.AddForce (Vector2.up * fuerza/3);
 		}
 	}
-	void OnCollisionEnter2D (Collision2D col){
-		if(col.gameObject.tag == "muerte"){
-			Instantiate (muerte, transform.position, transform.rotation);
-			Destroy(gameObject);
-		}
-	}
-
 }
